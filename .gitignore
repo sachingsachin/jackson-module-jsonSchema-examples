@@ -7,3 +7,17 @@ release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
+
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+#Vim
+*.swp
+
+*.log
+
+#Pydev Eclipse
+.pydevproject
