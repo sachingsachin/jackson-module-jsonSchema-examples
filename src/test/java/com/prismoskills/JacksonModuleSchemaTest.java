@@ -14,7 +14,7 @@ import com.fasterxml.jackson.module.jsonSchema.JsonSchema;
 import com.fasterxml.jackson.module.jsonSchema.JsonSchemaGenerator;
 
 @RunWith(Parameterized.class)
-public class SchemaTest {
+public class JacksonModuleSchemaTest {
 
     private final ObjectMapper mapper;
     private final JsonSchemaGenerator schemaGen;
@@ -28,10 +28,12 @@ public class SchemaTest {
             { BaseType.class },
             { DerivedType1.class },
             { NonStringMap.class },
+            { ExtendingList.class },
+            { ExtendingMap.class },
        });
     }
 
-    public SchemaTest(Class<?> type) {
+    public JacksonModuleSchemaTest(Class<?> type) {
         mapper = new ObjectMapper();
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
         mapper.setSerializationInclusion(Include.NON_NULL);
@@ -41,6 +43,7 @@ public class SchemaTest {
 
     @Test
     public void basicSchemaTest() throws Exception {
+        System.out.println("\n\n// " + type.getCanonicalName());
         JsonSchema schema = schemaGen.generateSchema(type);
         System.out.println(mapper.writeValueAsString(schema));
     }
